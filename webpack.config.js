@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 let mode = 'development';
 if (process.env.NODE_ENV === 'production') {
   mode = 'production';
@@ -37,9 +38,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.pug',
     }),
+    new VueLoaderPlugin(),
   ],
   module: {
     rules: [
+      {
+        test: /\.vue/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.html$/i,
         loader: 'html-loader',
